@@ -1,4 +1,4 @@
-import { PokemonsData } from "../../types/pokemons";
+import { PokemonsData } from "../types/pokemons";
 
 import { api } from "./api";
 
