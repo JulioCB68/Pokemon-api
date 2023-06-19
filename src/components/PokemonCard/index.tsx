@@ -1,28 +1,25 @@
 "use client";
+
 import React from "react";
 import Image from "next/image";
-import { useQuery } from "react-query";
 
-import { getPokemon } from "@/services/pokemons";
+import { PokemonId } from "@/types/pokemons";
 
 import styles from "./styles.module.scss";
 import "@/styles/global.scss";
 
 interface IPokemonProps {
-  name: string;
-  url: string;
+  pokemon: PokemonId;
 }
 
-export default function PokemonCard({ name, url }: IPokemonProps) {
-  const { data } = useQuery(["pokemons-id"], getPokemon);
-
-  const typeClassName = data ? data.types[0].type.name : "";
+export default function PokemonCard({ pokemon }: IPokemonProps) {
+  const type = pokemon ? pokemon.types[0].type.name : "";
 
   return (
-    <div className={`${typeClassName} ${styles.container}`}>
+    <div className={`${type} ${styles.container}`}>
       <div className={styles.leftSide}>
-        <p className={styles.pokemonId}>#{data?.id}</p>
-        <p className={styles.pokemonName}>{data?.name}</p>
+        <p className={styles.pokemonId}>#{pokemon?.id}</p>
+        <p className={styles.pokemonName}>{pokemon?.name}</p>
         <Image
           className={styles.imageCardLeftSide}
           src="Pattern.svg"
@@ -32,7 +29,7 @@ export default function PokemonCard({ name, url }: IPokemonProps) {
         />
         <div>
           <div className={styles.pokemonContentType}>
-            {data?.types.map((type, index) => (
+            {pokemon?.types.map((type, index) => (
               <div
                 key={index}
                 className={`${type.type.name}-type ${styles.pokemonType}`}
@@ -52,7 +49,7 @@ export default function PokemonCard({ name, url }: IPokemonProps) {
           height={150}
         />
         <Image
-          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${data?.id}.png`}
+          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon?.id}.png`}
           alt="Pokemon Image"
           width={150}
           height={150}

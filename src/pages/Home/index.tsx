@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useQuery } from "react-query";
 import { GoSearch } from "react-icons/go";
 
-import { getAllPokemons, getPokemon } from "@/services/pokemons";
+import { getPokemons } from "@/services/pokemons";
 import PokemonCard from "@/components/PokemonCard";
 
 import styles from "./styles.module.scss";
@@ -12,7 +12,7 @@ import styles from "./styles.module.scss";
 export default function Home() {
   const [name, setName] = useState("");
 
-  const { data } = useQuery(["pokemons"], getAllPokemons, {
+  const { data } = useQuery(["pokemons-id"], getPokemons, {
     retry: false,
     refetchOnWindowFocus: false,
   });
@@ -38,10 +38,10 @@ export default function Home() {
       </div>
 
       {data &&
-        data?.results?.map((pokemons, index) => (
-          <>
-            <PokemonCard key={index} name={pokemons.name} url={pokemons.url} />
-          </>
+        data?.map((pokemons, index) => (
+          <div key={index}>
+            <PokemonCard pokemon={pokemons!} />
+          </div>
         ))}
     </div>
   );
