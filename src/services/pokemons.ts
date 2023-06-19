@@ -1,8 +1,14 @@
-import { PokemonsData } from "../types/pokemons";
+import { Pokemons, Pokemon, PokemonId } from "../types/pokemons";
 
 import { api } from "./api";
 
-export const pokemons = async (): Promise<PokemonsData> => {
+export const getAllPokemons = async (): Promise<Pokemons> => {
   const response = await api.get("/pokemon");
   return response.data;
+};
+
+export const getPokemon = async (): Promise<PokemonId> => {
+  const response = await api.get("/pokemon/1");
+  const { id, name, types, species } = response.data;
+  return { id, name, types, species };
 };
