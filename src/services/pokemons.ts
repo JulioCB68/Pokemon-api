@@ -1,14 +1,32 @@
-import { Pokemons, Pokemon, PokemonId } from "../types/pokemons";
+import { PokemonId, PokemonValueDefault } from "../types/pokemons";
 
 import { api } from "./api";
 
-export const getAllPokemons = async (): Promise<Pokemons> => {
+export const getPokemons = async (): Promise<PokemonId[]> => {
   const response = await api.get("/pokemon");
-  return response.data;
+  const { results } = response.data;
+
+  const payloadPokemons: PokemonId[] = await Promise.all(
+    results.map(async (pokemon: PokemonValueDefault) => {
+      const { id, name, types, species } = await getMoreInfoAboutPokemonsByUrl(
+        pokemon.url
+      );
+
+      return {
+        name,
+        id,
+        types,
+        species,
+      };
+    })
+  );
+  return payloadPokemons;
 };
 
-export const getPokemon = async (): Promise<PokemonId> => {
-  const response = await api.get("/pokemon/1");
+const getMoreInfoAboutPokemonsByUrl = async (
+  url: string
+): Promise<PokemonId> => {
+  const response = await api.get(url);
   const { id, name, types, species } = response.data;
   return { id, name, types, species };
 };
