@@ -465,3 +465,22 @@ export const pokemons: PokemonId[] = [
     ],
   },
 ];
+
+export const pokemon: PokemonId = {
+  id: 1,
+  name: "bulbasaur",
+  species: {
+    name: "bulbasaur",
+    url: "https://pokeapi.co/api/v2/pokemon-species/1/",
+  },
+  types: [
+    {
+      slot: 1,
+      type: { name: "grass", url: "https://pokeapi.co/api/v2/type/12/" },
+    },
+    {
+      slot: 2,
+      type: { name: "poison", url: "https://pokeapi.co/api/v2/type/4/" },
+    },
+  ],
+};

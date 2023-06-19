@@ -31,8 +31,6 @@ export default function Home() {
     }
   );
 
-  console.log(pokemon);
-
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Pokédex</h1>
