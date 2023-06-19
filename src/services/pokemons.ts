@@ -30,3 +30,11 @@ const getMoreInfoAboutPokemonsByUrl = async (
   const { id, name, types, species } = response.data;
   return { id, name, types, species };
 };
+
+export const getPokemonsByName = async (
+  pokemonName: string
+): Promise<PokemonId> => {
+  const response = await api.get(`/pokemon/${pokemonName}`);
+  const { id, name, types, species } = response.data;
+  return { id, name, types, species };
+};

@@ -4,18 +4,34 @@ import React, { useState } from "react";
 import { useQuery } from "react-query";
 import { GoSearch } from "react-icons/go";
 
-import { getPokemons } from "@/services/pokemons";
+import { getPokemons, getPokemonsByName } from "@/services/pokemons";
 import PokemonCard from "@/components/PokemonCard";
+import useDebounce from "@/hooks/useDebounce";
 
 import styles from "./styles.module.scss";
 
 export default function Home() {
   const [name, setName] = useState("");
 
-  const { data } = useQuery(["pokemons-id"], getPokemons, {
+  const debounceChange = useDebounce(setName, 1000);
+
+  const { data } = useQuery(["pokemons"], getPokemons, {
+    enabled: !name,
     retry: false,
     refetchOnWindowFocus: false,
   });
+
+  const { data: pokemon } = useQuery(
+    ["pokemons-name", name],
+    () => getPokemonsByName(name),
+    {
+      enabled: !!name,
+      retry: false,
+      refetchOnWindowFocus: false,
+    }
+  );
+
+  console.log(pokemon);
 
   return (
     <div className={styles.container}>
@@ -32,17 +48,20 @@ export default function Home() {
           name="search"
           id="search"
           placeholder="What Pokémon are you looking for?"
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e) => debounceChange(e.target.value)}
           className={styles.input}
         />
       </div>
 
-      {data &&
+      {!pokemon &&
+        data &&
         data?.map((pokemons, index) => (
           <div key={index}>
             <PokemonCard pokemon={pokemons!} />
           </div>
         ))}
+
+      {pokemon && <PokemonCard pokemon={pokemon!} />}
     </div>
   );
 }
