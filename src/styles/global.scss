@@ -1,0 +1,91 @@
+$grass: #8bbe8a;
+$fire: #ffa756;
+$water: #58abf6;
+$poison: #9f6e97;
+$normal: #b5b9c4;
+$bug: #8bd674;
+$flying: #748fc9;
+$eletric: #f2cb55;
+$ground: #f78551;
+
+.grass {
+  background-color: $grass;
+}
+
+.fire {
+  background-color: $fire;
+}
+
+.water {
+  background-color: $water;
+}
+
+.poison {
+  background-color: $poison;
+}
+
+.normal {
+  background-color: $normal;
+}
+
+.bug {
+  background-color: $bug;
+}
+
+.flying {
+  background-color: $flying;
+}
+
+.electric-type {
+  background-color: $eletric;
+}
+
+.ground {
+  background-color: $ground;
+}
+
+$grass-type: #62b957;
+$fire-type: #fd7d24;
+$water-type: #4a90da;
+$poison-type: #a552cc;
+$normal-type: #9da0aa;
+$bug-type: #8cb330;
+$flying-type: #748fc9;
+$eletric-type: #f2cb55;
+$ground-type: #f78551;
+
+.grass-type {
+  background-color: $grass-type;
+}
+
+.fire-type {
+  background-color: $fire-type;
+}
+
+.water-type {
+  background-color: $water-type;
+}
+
+.poison-type {
+  background-color: $poison-type;
+}
+
+.normal-type {
+  background-color: $normal-type;
+}
+
+.bug-type {
+  background-color: $bug-type;
+}
+
+.flying-type {
+  background-color: $flying-type;
+}
+
+.electric-type {
+  background-color: $eletric-type;
+}
+
+.ground-type {
+  background-color: $ground-type;
+}
